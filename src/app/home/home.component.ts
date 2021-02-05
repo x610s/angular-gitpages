@@ -1,5 +1,7 @@
+import { element } from 'protractor';
 import { PlanesService } from './../servicios/planes.service';
 import { Component, OnInit } from '@angular/core';
+import { Plan } from '../servicios/plan';
 
 @Component({
   selector: 'app-home',
@@ -8,15 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  planes:[] =[];
-  planesAny:any[] =[]
+  planesAny:Plan;
   constructor(private _http:PlanesService) {
-    this._http.getClientes().subscribe((data:any) =>{
-        this.planesAny= data;
-    })
+
   }
 
   ngOnInit(): void {
+
+    this._http.getPlan(1).subscribe( data => {
+        this.planesAny=data;
+    })
+
   }
 
 }
